@@ -1,10 +1,10 @@
-# Sample App Title
+# Voice Gather
 
-<a href="http://dev.bandwidth.com">
-  <img src="https://s3.amazonaws.com/bwdemos/BW-VMP.png" title="Product Quick Start Guide" alt="Product Quick Start Guide"/> <!--src should be image located in repo-->
+<a href="https://dev.bandwidth.com/docs/voice/quickStart">
+  <img src="./icon-voice.svg" title="Voice Quick Start Guide" alt="Voice Quick Start Guide"/>
 </a>
 
- # Table of Contents
+# Table of Contents
 
 * [Description](#description)
 * [Pre-Requisites](#pre-requisites)
@@ -15,7 +15,7 @@
 
 # Description
 
-A short description of your sample app and its capabilities.
+This sample app creates an outbound call to the supplied phone number, which if answered will prompt the user using [Gather BXML](https://dev.bandwidth.com/docs/voice/bxml/gather) to select between a list of options to hear different messages played back.
 
 # Pre-Requisites
 
@@ -30,13 +30,13 @@ For more information about API credentials see our [Account Credentials](https:/
 To install the required packages for this app, run the command:
 
 ```sh
-# package install command here
+pip install -r requirements.txt
 ```
 
-Use the following command/s to run the application:
+Use the following command to run the application:
 
 ```sh
-# start command here
+python main.py
 ```
 
 # Environmental Variables
@@ -50,18 +50,17 @@ BW_PASSWORD                          # Your Bandwidth API Password
 BW_NUMBER                            # The Bandwidth phone number involved with this application
 USER_NUMBER                          # The user's phone number involved with this application
 BW_VOICE_APPLICATION_ID              # Your Voice Application Id created in the dashboard
-BW_MESSAGING_APPLICATION_ID          # Your Messaging Application Id created in the dashboard
 BASE_CALLBACK_URL                    # Your public base url to receive Bandwidth Webhooks. No trailing '/'
 LOCAL_PORT                           # The port number you wish to run the sample on
 ```
 
 # Callback URLs
 
-For a detailed introduction, check out our [Bandwidth Product Specific Callbacks](https://dev.bandwidth.com/docs/messaging/webhooks) page.
+For a detailed introduction, check out our [Bandwidth Product Specific Callbacks](https://dev.bandwidth.com/docs/voice/webhooks) page.
 
 Below are the callback paths:
-* **Should follow `/callbacks/{direction}/{service}` conventions**
-* `<add other callbacks>`
+* `/callbacks/outbound/voice`
+* `/callbacks/outbound/gather`
 
 ## Ngrok
 
@@ -73,3 +72,5 @@ ngrok http $LOCAL_PORT
 ```
 
 You can view your public URL at `http://127.0.0.1:4040` after ngrok is running.  You can also view the status of the tunnel and requests/responses here.
+
+Once your public ngrok url has been created, you can use it as the `BASE_CALLBACK_URL` environmental variable and set it in the voice application created in the [pre-requisites](#pre-requisites) section.
