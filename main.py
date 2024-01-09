@@ -32,7 +32,7 @@ bandwidth_api_client = bandwidth.ApiClient(bandwidth_configuration)
 bandwidth_calls_api_instance = bandwidth.CallsApi(bandwidth_api_client)
 
 
-@app.post("/callbacks/outbound/voice", status_code=http.HTTPStatus.OK, )
+@app.post("/callbacks/outbound/voice", status_code=http.HTTPStatus.OK)
 def outbound_voice(answer_callback: bandwidth.models.AnswerCallback):
     bxml = BxmlResponse()
 
