@@ -45,7 +45,7 @@ def invalid_request(request, exc):
     return Response(status_code=http.HTTPStatus.BAD_REQUEST)
 
 
-@app.post("/calls", status_code=http.HTTPStatus.OK)
+@app.post("/calls", status_code=http.HTTPStatus.NO_CONTENT)
 def create_call(call_request: CallRequest):
     create_call_body = bandwidth.CreateCall(
         application_id=BW_VOICE_APPLICATION_ID,
@@ -59,6 +59,8 @@ def create_call(call_request: CallRequest):
     except Exception as e:
         print(f"Failed to create call: {e}")
         return Response(status_code=http.HTTPStatus.INTERNAL_SERVER_ERROR)
+
+    return Response(status_code=http.HTTPStatus.NO_CONTENT)
 
 
 @app.post("/callbacks/outbound/voice", status_code=http.HTTPStatus.OK)
